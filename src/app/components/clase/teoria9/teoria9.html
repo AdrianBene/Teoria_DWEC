@@ -1,0 +1,18 @@
+<h1 class="text-secondary">Teoria 9</h1>
+
+
+<h2>INPUTS</h2>
+<div class="row">
+
+  @for (i of [1, 2, 3]; track $index) {
+    <div class="col">
+      <app-teoria9-hijo [price]=50 productName="Camiseta" disable="true" (onAddToCart)="onAddToCart($event)"
+                        [productId]="i" />
+    </div>
+
+
+  }
+
+</div>
+
+

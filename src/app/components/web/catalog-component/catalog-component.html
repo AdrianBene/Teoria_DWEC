@@ -1,0 +1,39 @@
+<section class="container my-4">
+  <header class="row mb-4">
+    <div class="col-12 d-flex justify-content-between align-items-center">
+      <h2 class="text-dark mb-0">Catálogo de productos</h2>
+      <span class="badge bg-secondary py-2 px-3">
+        Añadidos: {{ selectedCount() }} productos
+      </span>
+    </div>
+  </header>
+
+
+  <app-product-filter-component [(searchQuery)]="searchTerm" [(selectedCategory)]="categoryTerm" />
+
+
+
+  @if (lastVieredProducts(); as product) {
+    <div class="alert alert-info alert-dismissible fade show mb-4" role="alert">
+      <strong>Inspeccionando: </strong>{{ product.title }}-  {{ product.price | currency:'EUR' }}-
+      Categoria:{{ product.category }}
+      <button class="btn-close" aria-label="" (click)="lastVieredProducts.set(null)" type="button"></button>
+    </div>
+
+
+  }
+  <div class="row row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
+    @for (item of filteredPRoducts(); track item.id) {
+      <div class="col">
+        <app-product-card-component [product]="item" (addToCart)="reduceStock($event)"
+                                    (viewDetails)="onProductDetails($event)" />
+      </div>
+    } @empty {
+      <div class="col-12">
+        <div class="alert alert-warning text-center" role="alert">
+          Actualmente no hay productos en stock
+        </div>
+      </div>
+    }
+  </div>
+</section>

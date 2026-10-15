@@ -1,0 +1,52 @@
+<div class="card h-110">
+
+  <img [src]="product().imageUrl"
+       [alt]="product().title" class="card-img-top p-2">
+  <div class="card-body">
+    <div class="card-text">{{ product().title }}</div>
+    <div class="card-text">
+      <span class="badge bg-info">{{ product().category }}</span>
+    </div>
+    <div class="card-text my-2">
+      <p>Unidades disponibles:
+        <span class="badge bg-primary">{{ product().stock }}</span></p>
+    </div>
+    <div class="card-text my-2">
+      <p>Precio:
+        <span class="">{{ product().price }}</span></p>
+    </div>
+    @if (showAlert()) {
+      <div class="alert alert-danger py-2 fs-6" role="alert">
+        ¡Agotado! No puedes añadir más unidades.
+      </div>
+    }
+    @if (isLowStock()) {
+      <div class="alert alert-warning py-1 mb-2">Solo quedan {{ product().stock }} unidades</div>
+    }
+    @if (isOutOfStock()) {
+      <div class="alert alert-danger py1 mb-2">Agotado!!</div>
+    }
+
+
+  </div>
+
+
+  <div class=" card-footer d-flex justify-content-between p-2">
+
+
+    <div class="col">
+      <button class="btn btn-outline-primary w-100 my-3"
+              [disabled]="isOutOfStock()"
+              (click)="onAddToCart()">Add To Cart
+      </button>
+
+      <button class="btn btn-info w-100 my-3"
+              (click)="onViewDetails()">Viev Detalles
+      </button>
+
+
+    </div>
+
+
+  </div>
+</div>
